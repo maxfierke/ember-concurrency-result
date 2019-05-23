@@ -5,6 +5,8 @@ tasks, based on an idea Alex Machtneer floated in the Ember Community Discord.
 
 Some of this will probably changed.
 
+Uses `Result` from [`true-myth`](https://github.com/true-myth/true-myth).
+
 ## Compatibility
 
 * Ember.js v2.18 or above
@@ -41,7 +43,7 @@ export default Component.extend({
   someMethod() {
     const lastValue = this.myTask.last.value;
 
-    if (lastValue.ok) {
+    if (lastValue.isOk()) {
       const widgets = lastValue.value;
 
       alert(`There are ${widgets.length} widgets in the widgetry.`);
@@ -88,7 +90,7 @@ export default Component.extend({
   someMethod() {
     const lastValue = this.myTask.last.value;
 
-    if (lastValue.ok) {
+    if (lastValue.isOk()) {
       const widgets = lastValue.value;
 
       alert(`There are ${widgets.length} widgets in the widgetry.`);
