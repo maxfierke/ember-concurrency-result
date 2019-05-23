@@ -7518,6 +7518,11 @@ trim-right@^1.0.1:
   resolved "https://registry.yarnpkg.com/trim-right/-/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
   integrity sha1-yy4SAwZ+DI3h9hQJS5/kVwTqYAM=
 
+"true-myth@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/true-myth/-/true-myth-3.0.0.tgz#94e67a3bf270c2e09370dcab5a201b385750c92e"
+  integrity sha512-igEdH4YnEEpTsSZshp4MspGDooM4mOHWYUKyavmaUrhRd4oqWaUnbVgMLJc/Z/bz3s/UgYWAMHoTsG3FMTJWBg==
+
 tslib@^1.9.0:
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"

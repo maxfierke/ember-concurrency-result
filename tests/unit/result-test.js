@@ -3,19 +3,17 @@ import { module, test } from 'qunit';
 
 module('Unit: Result', function() {
   test('success value', function(assert) {
-    const obj = new Result(true, 'blahhhh');
+    const obj = Result.ok('blahhhh');
 
-    assert.equal(obj.ok, true, 'expected #ok to be false');
+    assert.equal(obj.isOk(), true, 'expected #isOk to be true');
     assert.equal(obj.value, 'blahhhh', 'expected #value to return the value passed in');
-    assert.equal(obj.error, null, 'expected #error to be null');
   })
 
   test('error value', function(assert) {
     const error = new Error('a sad happened');
-    const obj = new Result(false, error);
+    const obj = Result.err(error);
 
-    assert.equal(obj.ok, false, 'expected #ok to be false');
-    assert.equal(obj.value, null, 'expected #value to be null');
+    assert.equal(obj.isErr(), true, 'expected #isErr to be true');
     assert.equal(obj.error, error, 'expected #error to return the error passed in');
   })
 });

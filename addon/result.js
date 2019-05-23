@@ -1,31 +1,5 @@
 import { assert } from '@ember/debug';
-
-export class Result {
-  constructor(success, value) {
-    this._taskSuccess = success
-    this._taskValue = value;
-  }
-
-  get ok() {
-    return this._taskSuccess;
-  }
-
-  get error() {
-    if (this.ok) {
-      return null;
-    } else {
-      return this._taskValue;
-    }
-  }
-
-  get value() {
-    if (this.ok) {
-      return this._taskValue;
-    } else {
-      return null;
-    }
-  }
-}
+import Result from 'true-myth/result';
 
 export function result(taskProperty) {
   assert("result() will only work with ember-concurrency >=0.7.19 -- please upgrade", taskProperty.taskFn);
@@ -36,13 +10,13 @@ export function result(taskProperty) {
     try {
       const fnResult = yield* baseTaskFn.apply(this, args);
 
-      if (fnResult instanceof Result) {
+      if (fnResult instanceof Result.Ok || fnResult instanceof Result.Err) {
         return fnResult;
       } else {
-        return new Result(true, fnResult);
+        return Result.ok(fnResult);
       }
     } catch (e) {
-      return new Result(false, e);
+      return Result.err(e);
     }
   }
 
@@ -50,3 +24,4 @@ export function result(taskProperty) {
 }
 
 export default Result;
+export { default as Result } from 'true-myth/result';

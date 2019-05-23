@@ -6,7 +6,7 @@ import { result, Result } from 'ember-concurrency-result';
 
 module('Unit: wrapped task use', function() {
   test("`TaskProperty`s can be extended as result by wrapping the task: success", function(assert) {
-    assert.expect(4);
+    assert.expect(3);
 
     const done = assert.async(1);
 
@@ -24,24 +24,19 @@ module('Unit: wrapped task use', function() {
     });
 
     const ret = taskInstance.value;
-    assert.ok(ret instanceof Result, 'expected return value to be a Result');
-    assert.equal(ret.ok, true, 'expected Result.ok to be true');
+    assert.ok(ret instanceof Result.Ok, 'expected return value to be a Result.Ok');
+    assert.equal(ret.isOk(), true, 'expected Result#isOk to be true');
     assert.equal(
       ret.value,
       'why do people use the term monad? it is confusing',
-      'expected task return as Return.value'
-    );
-    assert.equal(
-      ret.error,
-      null,
-      'expected Return.error to be null'
+      'expected task return as Return#value'
     );
 
     done();
   });
 
   test("`TaskProperty`s can be extended as result by wrapping the task: failure", function(assert) {
-    assert.expect(4);
+    assert.expect(3);
 
     const done = assert.async(1);
 
@@ -62,24 +57,19 @@ module('Unit: wrapped task use', function() {
     });
 
     const ret = taskInstance.value;
-    assert.ok(ret instanceof Result, 'expected return value to be a Result');
-    assert.equal(ret.ok, false, 'expected Result.ok to be false');
-    assert.equal(
-      ret.value,
-      null,
-      'expected null as Return.value'
-    );
+    assert.ok(ret instanceof Result.Err, 'expected return value to be a Result.Err');
+    assert.equal(ret.isErr(), true, 'expected Result#isErr to be true');
     assert.equal(
       ret.error,
       error,
-      'expected Return.error to be the task error'
+      'expected Return#error to be the task error'
     );
 
     done();
   });
 
   test("doesn't double wrap results", function(assert) {
-    assert.expect(4);
+    assert.expect(3);
 
     const done = assert.async(1);
 
@@ -101,17 +91,12 @@ module('Unit: wrapped task use', function() {
     });
 
     const ret = taskInstance.value;
-    assert.ok(ret instanceof Result, 'expected return value to be a Result');
-    assert.equal(ret.ok, true, 'expected Result.ok to be true');
+    assert.ok(ret instanceof Result.Ok, 'expected return value to be a Result.Ok');
+    assert.equal(ret.isOk(), true, 'expected Result#isOk to be true');
     assert.equal(
       ret.value,
       'why do people use the term monad? it is confusing',
-      'expected task return as Return.value'
-    );
-    assert.equal(
-      ret.error,
-      null,
-      'expected Return.error to be null'
+      'expected task return as Return#value'
     );
 
     done();
